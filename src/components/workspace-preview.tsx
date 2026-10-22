@@ -17,6 +17,7 @@ import {
 import { AppHeader } from "./app-header";
 import { Badge } from "./ui/badge";
 import { ROLE_LABELS, type DemoRole } from "../lib/demo-auth";
+import { DemoStudentWorkspace } from "./demo-student-workspace";
 
 const roleWorkspaces: Record<
   DemoRole,
@@ -118,9 +119,11 @@ export function WorkspacePreview({
       <AppHeader
         fullName={fullName}
         role={role}
-        institution={institution}
         isDemo={isDemo}
       />
+      {isDemo && role === "student" ? (
+        <DemoStudentWorkspace fullName={fullName} institution={institution} />
+      ) : (
       <main className="container mx-auto max-w-6xl px-4 py-8">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
           <div>
@@ -230,6 +233,7 @@ export function WorkspacePreview({
           </Link>
         </div>
       </main>
+      )}
     </div>
   );
 }

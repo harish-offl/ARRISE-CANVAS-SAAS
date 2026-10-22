@@ -40,25 +40,31 @@ registering the local and production redirect URLs.
   unavailable.
 - The login page also provides public static demo credentials for student,
   mentor, faculty, staff, HOD, coordinator, institution admin, CA/accounts and
-  SaaS super admin previews. All use `CanvasDemo2026!`; these only navigate to
-  the Canvas workspace preview and are not authenticated accounts or protected
-  dashboards. Real Supabase sign-ins continue to `/dashboard`.
+  SaaS super admin previews. All use `CanvasDemo2026!`; these navigate to
+  Canvas workspace previews and are not authenticated accounts or protected
+  dashboards. The student preview has interactive sample course, assignment,
+  material and calendar views; its sample data and submission toggles are
+  temporary and are not saved to an account. Other roles remain illustrative
+  workspace previews. Real Supabase sign-ins continue to `/dashboard`.
 - Signup does not let a user assign their own institution role. An authorized
   institution workflow must provision the user's profile and access.
-- The student dashboard still uses sample fixture data and is visibly marked
-  as a preview. Demo users see static role-specific workspace mockups at
-  `/dashboard`; they are not authenticated sessions.
+- The authenticated student dashboard uses the signed-in profile but does not
+  show courses, progress, assignments or other sample learning records. It
+  clearly reports that institution data is not connected. Demo users see
+  separate static role-specific workspace mockups at `/dashboard`; they are
+  not authenticated sessions and cannot access student records.
 - Pricing is informational only. There is no billing provider, configurable
   plan store, subscription enforcement or usage-limit enforcement yet.
-- There are no checked-in database migrations in this repository. Before
-  connecting a Supabase project, audit its existing schema and RLS policies.
-  The current server auth helper expects a `profiles` record for each user
-  with `role`, `fullName` and `institutionId` fields; verify the actual schema
-  and mapping before use.
-- Tenant membership, server-side tenant authorization, live role-specific
-  dashboards, learning-module persistence, billing, and reviewed legal terms
-  and privacy disclosures are not yet implemented. This build is not ready for
-  production or real institutional data.
+- There are no checked-in database migrations in this repository. The current
+  server auth helper expects a `profiles` record for each user with `role`,
+  `fullName` and `institutionId` fields; verify the deployed schema and RLS
+  policies before connecting learning data.
+- Tenant membership checks, server-side authorization for learning records,
+  live courses and materials, submissions, calendar, notifications, search,
+  settings, billing, and reviewed legal terms and privacy disclosures are not
+  yet implemented. This build is not ready for production or real institutional
+  data. Do not add data queries or migrations until the existing schema and
+  access policies are reviewed.
 
 ## Quality checks
 
